@@ -6,12 +6,12 @@ function setup() {
 
 class Stroke {
   constructor(x, y) {
-    this.pts = [createVector(x, y)];
+    this.pts = [vec2(x, y)];
     this.col = '#000';
     this.lw = 2
   }
   add_point(x, y) {
-    this.pts.push(createVector(x, y));
+    this.pts.push(vec2(x, y));
   }
 }
 
@@ -24,7 +24,7 @@ function draw() {
     for (let p of s.pts) {
       vertex(p.x, p.y);
     }
-    endShape();  
+    endShape();
   }
   noStroke();
   fill(0);
