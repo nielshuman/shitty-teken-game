@@ -1,4 +1,6 @@
 let socket;
+let other_x = -1;
+let other_y = -1;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -40,9 +42,16 @@ function draw() {
   noStroke();
   fill(0);
   text(`FPS: ${frameRate()|0}`, 30, height-30);
-  stroke(0); noFill();
+  stroke(0);
+  fill('#123');
   circle(mouseX, mouseY, 20);
+  fill(255);
   circle(mouseX, mouseY, 1);
+
+  fill('#321');
+  circle(other_x, other_y, 20);
+  fill(255);
+  circle(other_x, other_y, 1);
 }
 
 function mousePressed() {
@@ -68,6 +77,11 @@ function mouseReleased() {
 
 function mouseMoved() {
   socket.emit('client_update', mouseX, mouseY, cur_stroke);
+}
+
+function on_server_update(id, ox, oy, os) {
+  other_x = ox;
+  other_y = oy;
 }
 
 function on_stroke(s) {

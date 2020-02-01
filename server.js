@@ -12,6 +12,6 @@ io.sockets.on('connection', (socket) => {
   })
 
   socket.on('client_update', (mx, my, s) => {
-    socket.broadcat.emit('server_update', socket.id, mx, my, s);
+    socket.broadcast.emit('server_update', socket.id, mx, my, s);
   })
 });
