@@ -2,16 +2,17 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   strokeCap(ROUND);
   strokeJoin(ROUND);
+  cursor('none')
 }
 
 class Stroke {
   constructor(x, y) {
-    this.pts = [vec2(x, y)];
+    this.pts = [[x, y]];
     this.col = '#000';
     this.lw = 2
   }
   add_point(x, y) {
-    this.pts.push(vec2(x, y));
+    this.pts.push([x, y]);
   }
 }
 
@@ -28,7 +29,10 @@ function draw() {
   }
   noStroke();
   fill(0);
-  text(`FPS: ${frameRate()|0}`, 30, height-30)
+  text(`FPS: ${frameRate()|0}`, 30, height-30);
+  stroke(0); noFill();
+  circle(mouseX, mouseY, 20);
+  circle(mouseX, mouseY, 1);
 }
 
 function mousePressed() {
@@ -47,6 +51,6 @@ function mouseReleased() {
 
 function keyTyped() {
   if (key == 'z') drawing.pop();
-  if (key == 'ctrl') drawing = [];
+  if (key == 'c') drawing = [];
   console.log(key)
 }
