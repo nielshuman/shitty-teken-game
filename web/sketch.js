@@ -1,6 +1,5 @@
 let socket;
-let other_x = -1;
-let other_y = -1;
+let players;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -46,12 +45,7 @@ function draw() {
   fill('#123');
   circle(mouseX, mouseY, 20);
   fill(255);
-  circle(mouseX, mouseY, 1);
-
-  fill('#321');
-  circle(other_x, other_y, 20);
-  fill(255);
-  circle(other_x, other_y, 1);
+  circle(mouseX, mouseY, 2);
 }
 
 function mousePressed() {
@@ -79,11 +73,6 @@ function mouseMoved() {
   socket.emit('client_update', mouseX, mouseY, cur_stroke);
 }
 
-function on_server_update(id, ox, oy, os) {
-  other_x = ox;
-  other_y = oy;
-}
-
 function on_stroke(s) {
   print('alert', s);
   if (s.id === socket.id) return;
@@ -96,4 +85,8 @@ function keyTyped() {
   if (key == 'd') print(cur_stroke);
 
   console.log(key)
+}
+
+function on_server_update(p) {
+  players = p;
 }
