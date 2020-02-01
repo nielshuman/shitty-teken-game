@@ -10,4 +10,8 @@ io.sockets.on('connection', (socket) => {
   socket.on('stroke', (s) => {
     socket.broadcast.emit('stroke', s);
   })
+
+  socket.on('client_update', (mx, my, s) => {
+    socket.broadcat.emit('server_update', socket.id, mx, my, s);
+  })
 });

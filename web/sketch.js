@@ -8,6 +8,7 @@ function setup() {
 
   socket = io();
   socket.on('stroke', on_stroke);
+  socket.on('server_update', on_server_update);
 }
 
 class Stroke {
@@ -63,6 +64,10 @@ function mouseReleased() {
       cur_stroke = null;
     }
   }
+}
+
+function mouseMoved() {
+  socket.emit('client_update', mouseX, mouseY, cur_stroke);
 }
 
 function on_stroke(s) {
